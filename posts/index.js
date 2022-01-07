@@ -9,22 +9,7 @@ app.use(bodyParser.json());
 app.use(cors());
 
 let posts = {
-  "e0719641": {
-    "id": "e0719641",
-    "title": "qui"
-  },
-  "a0e17742": {
-      "id": "a0e17742",
-      "title": "quo"
-  },
-  "92d56d19": {
-      "id": "92d56d19",
-      "title": "No Title"
-  },
-  "9a0c1a2d": {
-      "id": "9a0c1a2d",
-      "title": "Qua"
-  }
+
 };
 
 app.get('/posts', (req, res) => {
@@ -53,9 +38,9 @@ app.post('/posts', async (req, res) => {
 });
 
 app.post('/events', (req, res) => {
-  console.log('Event type: ', req.body.type);
 
   const { type, data } = req.body;
+  console.log('Posts receive event: ', type);
 
   if(type === "Reset") {
     posts = {};
@@ -63,14 +48,6 @@ app.post('/events', (req, res) => {
 
   res.status(201).send({});
 });
-
-// app.post('/posts/delete', (req, res) => {
-//   if (req.query.all) {
-//     posts = {};
-//   }
-
-//   res.status(201).send({});
-// });
 
 app.listen(4000, () => {
   console.log('Listening on 4000');

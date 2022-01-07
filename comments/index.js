@@ -9,30 +9,7 @@ app.use(bodyParser.json());
 app.use(cors());
 
 let commentsByPostId = {
-  "92d56d19": [
-    {
-      "id": "e76ce528",
-      "content": "231"
-    }
-  ],
-  "a0e17742": [
-    {
-      "id": "764cf4d7",
-      "content": "4345353"
-    }
-  ],
-  "e0719641": [
-    {
-      "id": "bd158d3f",
-      "content": "345345"
-    }
-  ],
-  "9a0c1a2d": [
-    {
-      "id": "28fd957d",
-      "content": "9879789"
-    }
-  ]
+
 };
 
 app.get('/posts/:id/comments', (req, res) => {
@@ -67,10 +44,32 @@ app.post('/posts/:id/comments', async (req, res) => {
   res.status(201).send(comments);
 });
 
-app.post('/events', (req, res) => {
-  console.log('Event type: ', req.body.type);
+app.post('/events', async (req, res) => {
 
   const { type, data } = req.body;
+  console.log('Comments receive event: ', type);
+
+  if (type === "CommentModerated") {
+    const {id, content, postId, status} = data;
+    console.log(data);
+
+    const comments = commentsByPostId[postId];
+    const comment = comments.find(c => {
+      return c.id === id
+    });
+    comment.status = status;
+
+    // send comment updated to eventbus
+    await axios.post('http://localhost:4005/events', {
+      type: 'CommentUpdated',
+      data: {
+        id,
+        content, 
+        postId, 
+        status
+      }
+    });
+  }
 
   if (type === "Reset") {
     commentsByPostId = {};
