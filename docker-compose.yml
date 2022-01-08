@@ -1,0 +1,84 @@
+version: "3.9"
+
+services:
+  # interactive:
+  #   image: node:14.15.5-alpine3.11
+  #   stdin_open: true # docker run -i
+  #   tty: true        # docker run -t
+  #   working_dir: /var/www/app
+  #   volumes: 
+  #     - .:/var/www/app
+  #   ports:
+  #     - 8080:3000
+  #   networks:
+  #     - nm-network
+  #   entrypoint: /bin/sh
+
+  posts:
+    image: flecheria/microservice-post:0.0.1
+    build:
+      context: ./posts
+      dockerfile: posts.dockerfile
+    # ports:
+    #   - 4000:4000
+    # networks:
+    #   - nm-network
+    # command: ["npm", "run", "startdocker"]
+  
+  comments:
+    image: flecheria/microservice-comments:0.0.1
+    build:
+      context: ./comments
+      dockerfile: comments.dockerfile
+    # ports:
+    #   - 4001:4001
+    # networks:
+    #   - nm-network
+    # command: ["npm", "run", "startdocker"]
+
+  eventbus:
+    image: flecheria/microservice-eventbus:0.0.1
+    build:
+      context: ./eventbus
+      dockerfile: eventbus.dockerfile
+    # ports:
+    #   - 4005:4005
+    # networks:
+    #   - nm-network
+    # command: ["npm", "run", "startdocker"]
+
+  moderation:
+    image: flecheria/microservice-moderation:0.0.1
+    build:
+      context: ./moderation
+      dockerfile: moderation.dockerfile
+    # ports:
+    #   - 4003:4003
+    # networks:
+    #   - nm-network
+    # command: ["npm", "run", "startdocker"]
+
+  query:
+    image: flecheria/microservice-query:0.0.1
+    build:
+      context: ./query
+      dockerfile: query.dockerfile
+    # ports:
+    #   - 4002:4002
+    # networks:
+    #   - nm-network
+    # command: ["npm", "run", "startdocker"]
+
+  # mongodb:
+  #   image: mongo:4.4.3-bionic
+  #   working_dir: /data/db
+  #   volumes: 
+  #     - "./data:/data/db"
+  #   ports:
+  #     - "27017:27017"
+  #   networks:
+  #     - nm-network
+
+networks:
+  nm-network:
+    driver: bridge

@@ -5,6 +5,10 @@ const axios = require('axios');
 const app = express();
 app.use(bodyParser.json());
 
+app.get('/', (req, res) => {
+  res.status(200).send({ response: 'moderation working' })
+});
+
 app.post('/events', async (req, res) => {
 
   const { type, data } = req.body;

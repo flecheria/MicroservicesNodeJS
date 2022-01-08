@@ -11,6 +11,10 @@ let posts = {
 
 };
 
+app.get('/', (req, res) => {
+  res.status(200).send({ response: 'query working' })
+});
+
 app.get('/posts', (req, res) => {
   res.status(200).send(posts);
 });

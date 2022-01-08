@@ -7,6 +7,10 @@ app.use(bodyParser.json());
 
 const events = [];
 
+app.get('/', (req, res) => {
+  res.status(200).send({ response: 'eventbus working' })
+});
+
 app.get('/events', (req, res) => {
   res.status(200).send(events);
 });

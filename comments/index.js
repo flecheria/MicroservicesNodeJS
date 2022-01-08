@@ -12,6 +12,10 @@ let commentsByPostId = {
 
 };
 
+app.get('/', (req, res) => {
+  res.status(200).send({ response: 'comments working' })
+});
+
 app.get('/posts/:id/comments', (req, res) => {
   res.status(200).send(commentsByPostId[req.params.id] || []);
 });
