@@ -4,12 +4,14 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon --inspect=5858 index.js"
+    "start": "nodemon index.js",
+    "debug": "nodemon --inspect=8802 index.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "axios": "^0.24.0",
     "cors": "^2.8.5",
     "express": "^4.17.1",
     "nodemon": "^2.0.7"
