@@ -1,0 +1,46 @@
+{
+    "development":{
+        "posts": {
+            "host":"localhost",
+            "port": 4000
+        }, 
+        "comments": {
+            "host":"localhost",
+            "port": 4001
+        }, 
+        "query": {
+            "host":"localhost",
+            "port": 4002
+        }, 
+        "moderation": {
+            "host":"localhost",
+            "port": 4003
+        }, 
+        "eventbus": {
+            "host":"localhost",
+            "port": 4005
+        }
+    },
+    "production":{
+        "posts": {
+            "host": "post-service", 
+            "port": 4000
+        }, 
+        "comments": {
+            "host":"comment-service",
+            "port": 4001
+        }, 
+        "query": {
+            "host":"query service",
+            "port": 4002
+        }, 
+        "moderation": {
+            "host":"moderation-service",
+            "port": 4003
+        }, 
+        "eventbus": {
+            "host": "eventbus-service", 
+            "port": 4005
+        }
+    }
+}
