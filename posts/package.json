@@ -6,7 +6,8 @@
   "scripts": {
     "start": "nodemon index.js", 
     "debug": "nodemon --inspect=8800 index.js",
-    "startdocker": "nodemon index.js 0.0.0.0:4000" 
+    "startdocker": "nodemon index.js 0.0.0.0:4000", 
+    "production": "NODE_ENV=production nodemon index.js"
   },
   "keywords": [],
   "author": "",

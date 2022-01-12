@@ -17,19 +17,19 @@ services:
   posts:
     image: flecheria/microservice-post:0.0.1
     build:
-      context: ./posts
-      dockerfile: posts.dockerfile
+      context: ./
+      dockerfile: post.dockerfile
     # ports:
     #   - 4000:4000
     # networks:
     #   - nm-network
     # command: ["npm", "run", "startdocker"]
   
-  comments:
-    image: flecheria/microservice-comments:0.0.1
+  comment:
+    image: flecheria/microservice-comment:0.0.1
     build:
-      context: ./comments
-      dockerfile: comments.dockerfile
+      context: ./
+      dockerfile: comment.dockerfile
     # ports:
     #   - 4001:4001
     # networks:
@@ -39,7 +39,7 @@ services:
   eventbus:
     image: flecheria/microservice-eventbus:0.0.1
     build:
-      context: ./eventbus
+      context: ./
       dockerfile: eventbus.dockerfile
     # ports:
     #   - 4005:4005
@@ -50,7 +50,7 @@ services:
   moderation:
     image: flecheria/microservice-moderation:0.0.1
     build:
-      context: ./moderation
+      context: ./
       dockerfile: moderation.dockerfile
     # ports:
     #   - 4003:4003
@@ -58,11 +58,11 @@ services:
     #   - nm-network
     # command: ["npm", "run", "startdocker"]
 
-  query:
-    image: flecheria/microservice-query:0.0.1
-    build:
-      context: ./query
-      dockerfile: query.dockerfile
+  # query:
+  #   image: flecheria/microservice-query:0.0.1
+  #   build:
+  #     context: ./
+  #     dockerfile: query.dockerfile
     # ports:
     #   - 4002:4002
     # networks:

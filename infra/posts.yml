@@ -2,11 +2,15 @@ apiVersion: v1
 kind: Pod
 metadata:
   name: posts
+  labels:
+    app: posts
 spec:
   containers:
     - name: posts
       image: flecheria/microservice-posts:0.0.1
       imagePullPolicy: Never
+      ports:
+        - containerPort: 4000
       # resources:
       #   limits:
       #     memory: 512Mi

@@ -4,6 +4,16 @@ const { randomBytes } = require('crypto');
 const cors = require('cors');
 const axios = require('axios');
 
+// configuration
+const config_path = [process.env.NODE_ENV] == 'production'
+  ? './config.json'
+  : '../config/config.json';
+const config = require(config_path)[process.env.NODE_ENV];
+const HOST = config.comments.host;
+const PORT = config.comments.port;
+const EVENTBUS_SERVICE_HOST = config.eventbus.host;
+const EVENTBUS_SERVICE_PORT = config.eventbus.port;
+
 const app = express();
 app.use(bodyParser.json());
 app.use(cors());
@@ -35,7 +45,7 @@ app.post('/posts/:id/comments', async (req, res) => {
   commentsByPostId[req.params.id] = comments;
 
   // send to eventbus
-  await axios.post('http://localhost:4005/events', {
+  await axios.post(`http://${EVENTBUS_SERVICE_HOST}:${EVENTBUS_SERVICE_PORT}/events`, {
     type: 'CommentCreated',
     data: {
       id: commentId,
@@ -64,7 +74,7 @@ app.post('/events', async (req, res) => {
     comment.status = status;
 
     // send comment updated to eventbus
-    await axios.post('http://localhost:4005/events', {
+    await axios.post(`http://${EVENTBUS_SERVICE_HOST}:${EVENTBUS_SERVICE_PORT}/events`, {
       type: 'CommentUpdated',
       data: {
         id,
@@ -82,6 +92,6 @@ app.post('/events', async (req, res) => {
   res.status(201).send({});
 });
 
-app.listen(4001, () => {
-  console.log('Listening on 4001');
+app.listen(PORT, () => {
+  console.log(`Listening on ${PORT}`);
 });

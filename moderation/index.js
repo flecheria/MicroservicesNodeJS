@@ -2,6 +2,16 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const axios = require('axios');
 
+// configuration
+const config_path = [process.env.NODE_ENV] == 'production'
+  ? './config.json'
+  : '../config/config.json';
+const config = require(config_path)[process.env.NODE_ENV];
+const HOST = config.moderation.host;
+const PORT = config.moderation.port;
+const EVENTBUS_SERVICE_HOST = config.eventbus.host;
+const EVENTBUS_SERVICE_PORT = config.eventbus.port;
+
 const app = express();
 app.use(bodyParser.json());
 
@@ -19,7 +29,7 @@ app.post('/events', async (req, res) => {
     console.log(status);
 
     // send to eventbus
-    await axios.post('http://localhost:4005/events', {
+    await axios.post(`http://${EVENTBUS_SERVICE_HOST}:${EVENTBUS_SERVICE_PORT}/events`, {
       type: 'CommentModerated',
       data: {
         id: data.id,
@@ -34,6 +44,6 @@ app.post('/events', async (req, res) => {
 
 });
 
-app.listen(4003, () => {
-  console.log('Listening on 4003');
+app.listen(PORT, () => {
+  console.log(`Listening on ${PORT}`);
 });

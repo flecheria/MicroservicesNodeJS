@@ -1,8 +1,8 @@
 FROM node:16-alpine3.14
 
-WORKDIR /www/var/client
-COPY package.json /www/var/client
+WORKDIR /var/www/app
+COPY package.json /var/www/app
 RUN npm install
-COPY ./ /www/var/client
+COPY ./ /var/www/app
 
 CMD ["npm", "start"]

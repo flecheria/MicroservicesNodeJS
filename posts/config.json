@@ -1,0 +1,21 @@
+{
+    "development":{
+        "host":"localhost",
+        "posts": {
+            "port": "4000"
+        }, 
+        "eventbus": {
+            "port": "4005"
+        }
+    },
+    "production":{
+        "posts": {
+            "host": "posts-service", 
+            "port": "4000"
+        }, 
+        "eventbus": {
+            "host": "eventbus-service", 
+            "port": "4005"
+        }
+    }
+}
