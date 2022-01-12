@@ -9,6 +9,7 @@ ENV PORT=4005
 # EXPOSE $PORT
 WORKDIR /var/www/app
 COPY ./eventbus/package.json /var/www/app
+COPY ./eventbus/package-lock.json /var/www/app
 RUN npm install
 COPY ./config/config.json /var/www/app
 COPY ./eventbus /var/www/app

@@ -9,6 +9,7 @@ ENV PORT=4000
 # EXPOSE $PORT
 WORKDIR /var/www/app
 COPY ./posts/package.json /var/www/app
+COPY ./posts/package-lock.json /var/www/app
 RUN npm install
 COPY ./config/config.json /var/www/app
 COPY ./posts /var/www/app

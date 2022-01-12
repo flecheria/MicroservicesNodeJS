@@ -21,6 +21,9 @@ docker push flecheria/microserviceposts:0.0.1
 Pods Commands:
 
 ```powershell
+# apply all yaml inside a folder
+kubectl apply -f .
+
 kubectl apply -f <pod yaml file>
 kubectl delete -f posts.yml
 kubectl delete pod <pods name>
@@ -58,10 +61,41 @@ code ~/.zskrc
 # write alias kubectl=k
 ```
 
+## Nginx Ingress
+
+```powershell
+kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.1.0/deploy/static/provider/cloud/deploy.yaml
+
+kubectl get pods --namespace=ingress-nginx
+
+kubectl wait --namespace ingress-nginx --for=condition=ready pod --selector=app.kubernetes.io/component=controller --timeout=120s
+```
+
+## Notes
+
+Tweak hosts file /etc/hosts
+
+```powershell
+sudo nano /etc/hosts
+sudo open -a TextEdit /etc/hosts
+```
+
+To determine what process might be using port 80 on localhist, run:
+
+```powershell
+#macOS / Linux
+sudo lsof -i tcp:80
+
+# Windows:
+netstat -aon | findstr :80
+```
+
 ## Reference
 
 [Run multiple terminal](https://stackoverflow.com/questions/60621321/create-multiple-terminals-and-run-commands-in-vscode)  
 [Terminals Manager](https://marketplace.visualstudio.com/items?itemName=fabiospampinato.vscode-terminals)  
 [Macro Multi-Command](https://marketplace.visualstudio.com/items?itemName=ryuta46.multi-command)  
 [Kubernets Linters](https://stackoverflow.com/questions/64080471/kubernetes-one-or-more-containers-do-not-have-resource-limits-warning-in-vs-c)  
-
+[Nginx ingress installation](https://kubernetes.github.io/ingress-nginx/deploy/#quick-start)  
+[The Mac Hosts File: How to Modify /etc/hosts in Mac OS X with TextEdit](https://osxdaily.com/2016/02/29/modify-hosts-mac-os-x-textedit/)
+[Skaffold](https://skaffold.dev/)  

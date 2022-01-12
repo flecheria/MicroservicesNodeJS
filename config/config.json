@@ -31,7 +31,7 @@
             "port": 4001
         }, 
         "query": {
-            "host":"query service",
+            "host":"query-service",
             "port": 4002
         }, 
         "moderation": {

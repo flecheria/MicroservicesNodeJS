@@ -2,12 +2,15 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import CommentCreate from "./CommentCreate";
 import CommentList from "./CommentList";
+import Utils from "./Utils";
 
 const PostList = () => {
   const [posts, setPosts] = useState({});
+  const host = Utils.getHost('query');
 
   const fetchPosts = async () => {
-    const res = await axios.get("http://localhost:4002/posts");
+    // http://localhost:4002/
+    const res = await axios.get(`http://${host}/posts`);
     setPosts(res.data);
   };
 
