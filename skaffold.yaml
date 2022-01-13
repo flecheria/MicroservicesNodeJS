@@ -1,0 +1,59 @@
+apiVersion: skaffold/v2beta26
+kind: Config
+deploy:
+  kubectl:
+    manifests:
+      - ./infra/k8s/*
+build:
+  local:
+    push: false
+  artifacts:
+    - image: flecheria/microservice-client:0.0.1
+      context: client
+      docker:
+        dockerfile: client.dockerfile
+      sync:
+        manual:
+          - src: 'src/**/*.js'
+            dest: .
+    - image: flecheria/microservice-comment:0.0.1
+      context: .
+      docker:
+        dockerfile: comment.dockerfile
+      sync:
+        manual:
+          - src: 'comment/*.js'
+            dest: .
+    - image: flecheria/microservice-eventbus:0.0.1
+      context: .
+      docker:
+        dockerfile: eventbus.dockerfile
+      sync:
+        manual:
+          - src: 'eventbus/*.js'
+            dest: .
+    - image: flecheria/microservice-moderation:0.0.1
+      context: .
+      docker:
+        dockerfile: moderation.dockerfile
+      sync:
+        manual:
+          - src: 'moderation/*.js'
+            dest: .
+    - image: flecheria/microservice-post:0.0.1
+      context: .
+      docker:
+        dockerfile: post.dockerfile
+      sync:
+        manual:
+          - src: 'post/*.js'
+            dest: .
+    - image: flecheria/microservice-query:0.0.1
+      context: .
+      docker:
+        dockerfile: query.dockerfile
+      sync:
+        manual:
+          - src: 'query/*.js'
+            dest: .
+  
