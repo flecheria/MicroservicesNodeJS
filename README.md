@@ -61,6 +61,14 @@ code ~/.zskrc
 # write alias kubectl=k
 ```
 
+## Skaffold
+
+```powershell
+skaffold dev
+
+# CTRL+C to exit from skaffold
+````
+
 ## Nginx Ingress
 
 ```powershell
